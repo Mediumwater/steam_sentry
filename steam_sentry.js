@@ -34,7 +34,6 @@ steamClient.on('connected', function() {
         });
     } else if (fs.existsSync("./sentry/" + username + '.sentry')){
         sentryfile = fs.readFileSync("./sentry/" + username + '.sentry');
-        //sha = MakeSha(sentryfile);
         sha = crypto.createHash('sha1').update(sentryfile).digest()
         console.log("> Logging in with sentry");
         steamUser.logOn({
@@ -67,18 +66,12 @@ steamClient.on("logOnResponse", function(result) {
             rl.pause();
         });
     } else {
-        
+
     }
 });
 
 steamClient.on("error", function(error) {
 });
-
-function MakeSha(bytes) {
-    var hash = crypto.createHash('sha1');
-    hash.update(bytes);
-    return hash.digest();
-}
 
 steamUser.on('updateMachineAuth', function(sentry, callback) {
     console.log("sentry saved");
