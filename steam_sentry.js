@@ -56,8 +56,7 @@ steamClient.on("logOnResponse", function(result) {
         console.log("successfully logged in");
         if (authCode !== "" && fs.existsSync("./sentry/" + username + '.sentry'))
             process.exit();
-    }
-    if (result.eresult == Steam.EResult.AccountLogonDenied) {
+    } else if (result.eresult == Steam.EResult.AccountLogonDenied) {
         rl.resume();
         rl.question("Steam guard code: ", function(answer) {
             authCode  = answer;
@@ -66,7 +65,7 @@ steamClient.on("logOnResponse", function(result) {
             rl.pause();
         });
     } else {
-
+        //add error code handling
     }
 });
 
